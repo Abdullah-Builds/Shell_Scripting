@@ -1,0 +1,37 @@
+#Loop on whole directory ( Replace dot(.) with "$UserInputDirectory" )
+for file in ./*; do
+
+done
+
+
+
+#if Condition to check for a .txt
+count=1
+if [ -f "$file" ] && [[ "$file" == *.txt ]]; then
+
+    new="file${count}_${count}.txt"
+    mv "$file" "$new"
+    ((count++))
+fi
+
+
+#Extract filename without extension
+file="document.txt"
+filename="${file%.*}"
+echo "Original: $file"
+echo "Without Extension: $filename"
+
+
+#Extract Extension Only
+file="backup.tar.gz"
+extension="${file#*.}"
+echo "Full Extension: $extension"
+
+
+#Concatenate Strings 
+str1="Hello"
+str2="World"
+result="$str1 $str2"
+echo "$result"
+
+
