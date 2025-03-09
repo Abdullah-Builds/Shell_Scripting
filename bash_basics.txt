@@ -1,8 +1,6 @@
 #Loop on whole directory ( Replace dot(.) with "$UserInputDirectory" )
 for file in ./*; do
-
 done
-
 
 
 #if Condition to check for a .txt
@@ -36,6 +34,11 @@ echo "$result"
 
 #Count words
 word_count=$(wc -w < "$file")
+
+
+#words matching
+read -p "Enter a string: " str
+echo "$str" | grep -o '[aeiouAEIOU]' | wc -l
 
 
 #Date and Time
