@@ -34,4 +34,18 @@ str2="World"
 result="$str1 $str2"
 echo "$result"
 
+#Count words
+word_count=$(wc -w < "$file")
 
+
+#Search and Update
+read name
+  grep -i "$name" "$shift_file" > /dev/null  (It checks that the name exists)
+
+if [[ $? -ne 0 ]]; then
+  echo "No shift found for $name."
+  return
+fi
+    
+grep -i "$name" "$shift_file"                (Display all with existing name)
+sed -i "/$name/d" "$shift_file"              (Update)
