@@ -38,6 +38,11 @@ echo "$result"
 word_count=$(wc -w < "$file")
 
 
+#Date and Time
+datetime=$(date)  # Default format
+echo "$datetime"
+
+
 #Search and Update
 read name
   grep -i "$name" "$shift_file" > /dev/null  (It checks that the name exists)
