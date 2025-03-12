@@ -1,6 +1,8 @@
 #Loop on whole directory ( Replace dot(.) with "$UserInputDirectory" )
 for file in ./*; do
+
 done
+
 
 
 #if Condition to check for a .txt
@@ -13,17 +15,10 @@ if [ -f "$file" ] && [[ "$file" == *.txt ]]; then
 fi
 
 
-#Extract filename without extension
-file="document.txt"
-filename="${file%.*}"
-echo "Original: $file"
-echo "Without Extension: $filename"
-
-
-#Extract Extension Only
-file="backup.tar.gz"
-extension="${file#*.}"
-echo "Full Extension: $extension"
+#Files
+ filename=$(basename -- "$file")   # Get filename with extension
+ name="${filename%.*}"             # Extract filename without extension
+ ext="${filename##*.}"             # Extract extension
 
 
 #Concatenate Strings 
@@ -32,9 +27,9 @@ str2="World"
 result="$str1 $str2"
 echo "$result"
 
+
 #Count words
 word_count=$(wc -w < "$file")
-
 
 #words matching
 read -p "Enter a string: " str
@@ -47,13 +42,16 @@ echo "$datetime"
 
 
 #Search and Update
+echo -n "Enter employee name to modify shift: "
 read name
-  grep -i "$name" "$shift_file" > /dev/null  (It checks that the name exists)
 
-if [[ $? -ne 0 ]]; then
-  echo "No shift found for $name."
-  return
-fi
-    
-grep -i "$name" "$shift_file"                (Display all with existing name)
-sed -i "/$name/d" "$shift_file"              (Update)
+if ! grep -iq "$name" "$shift_file"; then   (If does not exist)
+        return 1
+    fi
+
+grep -i "$name" "$shift_file"               (Display all with existing name)
+sed -i "/\b$name\b/d" "$shift_file"         (Delete all with existing name)
+
+
+
+
